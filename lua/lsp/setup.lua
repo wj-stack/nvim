@@ -32,18 +32,18 @@ require("mason-lspconfig").setup({
   automatic_installation = false,
 })
 
-
 local servers = {
-  sumneko_lua = require "lsp.config.lua", -- /lua/lsp/lua.lua
-  gopls = require "lsp.config.lua", -- /lua/lsp/lua.lua
-  -- html = {},
-  -- jsonls = {},
-  -- tsserver = {}
+  sumneko_lua = require "lsp.config.lua", -- /lua/lsp/config/lua.lua
+  gopls = require "lsp.config.gopls", -- /lua/lsp/config/lua.lua
+  ---- html = {},
+  ---- jsonls = {},
+  ---- tsserver = {}
 }
 local config = require("lspconfig")
 for name, server in pairs(servers) do
   if config[name] == nil then
-      return
+    return
   end
   server.on_setup(config[name])
 end
+

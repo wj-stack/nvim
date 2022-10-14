@@ -63,9 +63,9 @@ map("n", "K", "4k", opt)
 map("v", "p", '"_dP', opt)
 
 -- 退出
-map("n", "q", ":q<CR>", opt)
-map("n", "qq", ":q!<CR>", opt)
-map("n", "Q", ":qa!<CR>", opt)
+-- map("n", "q", ":q<CR>", opt)
+-- map("n", "qq", ":q!<CR>", opt)
+map("n", "Q", ":q<CR>", opt)
 
 -- insert 模式下，跳到行首行尾
 map("i", "<C-h>", "<ESC>I", opt)
@@ -144,10 +144,8 @@ pluginKeys.telescopeList = {
 -- lsp 回调函数快捷键设置
 pluginKeys.mapLSP = function(mapbuf)
   -- rename
-  mapbuf("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
-  -- code action
-  mapbuf("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
-  -- go xx
+  mapbuf("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
+  mapbuf("n", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
   mapbuf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opt)
   mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
   mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
