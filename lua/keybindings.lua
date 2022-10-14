@@ -37,7 +37,7 @@ map("n", "s=", "<C-w>=", opt)
 -- TODO: 改成悬浮终端
 -- TODO: 需要能够保存上下文
 -- Terminal相关
-map("n", "tt", ":sp | resize 15 | terminal<CR>i", opt)
+map("n", "<leader>t", ":sp | resize 15 | terminal<CR>i", opt)
 -- map("n", "tv", ":vsp | terminal<CR>", opt)
 map("t", "<Esc>", "<C-\\><C-n>", opt)
 map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
