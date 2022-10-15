@@ -3,7 +3,7 @@ vim.g.maplocalleader = " "
 
 local map = vim.api.nvim_set_keymap
 -- 复用 opt 参数
-local opt = {noremap = true, silent = true }
+local opt = { noremap = true, silent = true }
 
 -- 取消 s 默认功能
 map("n", "s", "", opt)
@@ -17,8 +17,8 @@ map("n", "so", "<C-w>o", opt)
 -- Alt + hjkl  窗口之间跳转
 map("n", "<A-h>", "<C-w>h", opt)
 map("n", "<A-j>", "<C-w>j", opt)
-map("n", "<A-k>", "<C-w>k", opt)
 map("n", "<A-l>", "<C-w>l", opt)
+map("n", "<A-k>", "<C-w>k", opt)
 
 -- 左右比例控制
 map("n", "<C-Left>", ":vertical resize -2<CR>i", opt)
@@ -33,17 +33,22 @@ map("n", "<C-Up>", ":resize -2<CR>", opt)
 -- 等比例
 map("n", "s=", "<C-w>=", opt)
 
+-- jk to esc
+map("i", "jk", "<Esc>", opt)
 
--- TODO: 改成悬浮终端
--- TODO: 需要能够保存上下文
 -- Terminal相关
-map("n", "<leader>t", ":sp | resize 15 | terminal<CR>i", opt)
+map("n", "tt", ":ToggleTerm<CR>", opt)
+-- nnoremap <silent><leader>tt <Cmd>exe v:count1 . "ToggleTerm"<CR>
+-- map("t", "<Esc>", "<Esc>:ToggleTerm<CR>", opt)
+-- map("n", "<leader>t", ":sp | resize 15 | terminal<CR>i", opt)
 -- map("n", "tv", ":vsp | terminal<CR>", opt)
-map("t", "<Esc>", "<C-\\><C-n>", opt)
-map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
-map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opt)
-map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opt)
-map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opt)
+-- map("t", "tt", ":ToggleTerm<CR>", opt)
+-- nnoremap <silent><leader>tt <Cmd>exe v:count1 . "ToggleTerm"<CR>
+map("t", "<Esc>", "<C-\\><C-n>:ToggleTerm<CR>", opt)
+-- map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
+-- map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opt)
+-- map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opt)
+-- map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opt)
 
 -- visual模式下缩进代码
 map("v", "<", "<gv", opt)
@@ -51,25 +56,28 @@ map("v", ">", ">gv", opt)
 -- 上下移动选中文本
 map("v", "J", ":move '>+1<CR>gv-gv", opt)
 map("v", "K", ":move '<-2<CR>gv-gv", opt)
-
+-- 可视模式下复制到剪辑版
+map("v", "<c-c>", '"+y', opt)
 
 -- 上下滚动浏览
 map("n", "J", "4j", opt)
 map("n", "K", "4k", opt)
 
-
-
 -- 在visual 模式里粘贴不要复制
 map("v", "p", '"_dP', opt)
 
 -- 退出
--- map("n", "q", ":q<CR>", opt)
--- map("n", "qq", ":q!<CR>", opt)
-map("n", "Q", ":q<CR>", opt)
+map("n", "q", ":q<CR>", opt)
+map("n", "qq", ":q!<CR>", opt)
+map("n", "Q", ":qa!<CR>", opt)
 
 -- insert 模式下，跳到行首行尾
 map("i", "<C-h>", "<ESC>I", opt)
 map("i", "<C-l>", "<ESC>A", opt)
+
+-- normal 模式下，跳到行首行尾
+map("n", "L", "$", opt)
+map("n", "H", "^", opt)
 
 -- insert 模式下, 进行上下移动
 map("i", "<C-j>", "<ESC>ja", opt)
@@ -86,13 +94,11 @@ map("n", "<C-w>", ":Bdelete!<CR>", opt)
 -- map("n", "<leader>bh", ":BufferLineCloseLeft<CR>", opt)
 -- map("n", "<leader>bc", ":BufferLinePickClose<CR>", opt)
 
-
 -- Telescope
 -- 查找文件
 map("n", "<C-p>", ":Telescope find_files<CR>", opt)
 -- 全局搜索
 map("n", "<C-f>", ":Telescope live_grep<CR>", opt)
-
 
 -- 插件快捷键
 local pluginKeys = {}
@@ -102,58 +108,75 @@ local pluginKeys = {}
 map("n", "<A-m>", ":NvimTreeToggle<CR>", opt)
 -- 列表快捷键
 pluginKeys.nvimTreeList = {
-  -- 打开文件或文件夹
-  { key = {"<CR>", "o", "<2-LeftMouse>"}, action = "edit" },
-  -- 分屏打开文件
-  { key = "v", action = "vsplit" },
-  { key = "h", action = "split" },
-  -- 显示隐藏文件
-  { key = "i", action = "toggle_custom" }, -- 对应 filters 中的 custom (node_modules)
-  { key = ".", action = "toggle_dotfiles" }, -- Hide (dotfiles)
-  -- 文件操作
-  { key = "<F5>", action = "refresh" },
-  { key = "a", action = "create" },
-  { key = "d", action = "remove" },
-  { key = "r", action = "rename" },
-  { key = "x", action = "cut" },
-  { key = "c", action = "copy" },
-  { key = "p", action = "paste" },
-  { key = "s", action = "system_open" },
+	-- 打开文件或文件夹
+	{ key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
+	-- 分屏打开文件
+	{ key = "v", action = "vsplit" },
+	{ key = "h", action = "split" },
+	-- 显示隐藏文件
+	{ key = "i", action = "toggle_custom" }, -- 对应 filters 中的 custom (node_modules)
+	{ key = ".", action = "toggle_dotfiles" }, -- Hide (dotfiles)
+	-- 文件操作
+	{ key = "<F5>", action = "refresh" },
+	{ key = "a", action = "create" },
+	{ key = "d", action = "remove" },
+	{ key = "r", action = "rename" },
+	{ key = "x", action = "cut" },
+	{ key = "c", action = "copy" },
+	{ key = "p", action = "paste" },
+	{ key = "s", action = "system_open" },
 }
-
 
 -- Telescope 列表中 插入模式快捷键
 pluginKeys.telescopeList = {
-  i = {
-    -- 上下移动
-    ["<C-j>"] = "move_selection_next",
-    ["<C-k>"] = "move_selection_previous",
-    ["<Down>"] = "move_selection_next",
-    ["<Up>"] = "move_selection_previous",
-    -- 历史记录
-    ["<C-n>"] = "cycle_history_next",
-    ["<C-p>"] = "cycle_history_prev",
-    -- 关闭窗口
-    ["<C-c>"] = "close",
-    -- 预览窗口上下滚动
-    ["<C-u>"] = "preview_scrolling_up",
-    ["<C-d>"] = "preview_scrolling_down",
-  },
+	i = {
+		-- 上下移动
+		["<C-j>"] = "move_selection_next",
+		["<C-k>"] = "move_selection_previous",
+		["<Down>"] = "move_selection_next",
+		["<Up>"] = "move_selection_previous",
+		-- 历史记录
+		["<C-n>"] = "cycle_history_next",
+		["<C-p>"] = "cycle_history_prev",
+		-- 关闭窗口
+		["<C-c>"] = "close",
+		-- 预览窗口上下滚动
+		["<C-u>"] = "preview_scrolling_up",
+		["<C-d>"] = "preview_scrolling_down",
+	},
 }
-
 -- lsp 回调函数快捷键设置
 pluginKeys.mapLSP = function(mapbuf)
-  -- rename
-  mapbuf("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
-  mapbuf("n", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
-  mapbuf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opt)
+	-- rename
+	--[[
+  Lspsaga 替换 rn
+  mapbuf("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opt)
+  --]]
+	mapbuf("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opt)
+	-- code action
+	--[[
+  Lspsaga 替换 ca
+  mapbuf("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opt)
+  --]]
+	mapbuf("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opt)
+	-- go xx
+	--[[
+    mapbuf('n', 'gd', '<cmd>Lspsaga preview_definition<CR>', opt)
+  --]]
+	mapbuf("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opt)
+	--[[
+  Lspsaga 替换 gh
   mapbuf("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", opt)
-  mapbuf("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opt)
-  mapbuf("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opt)
+  --]]
+	mapbuf("n", "gh", "<cmd>Lspsaga hover_doc<cr>", opt)
+	--[[
+  Lspsaga 替换 gr
   mapbuf("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opt)
-  -- diagnostic
+  --]]
+	mapbuf("n", "gr", "<cmd>Lspsaga lsp_finder<CR>", opt)
+	--[[
+  Lspsaga 替换 gp, gj, gk
   mapbuf("n", "gp", "<cmd>lua vim.diagnostic.open_float()<CR>", opt)
-  mapbuf("n", "gk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opt)
   mapbuf("n", "gj", "<cmd>lua vim.diagnostic.goto_next()<CR>", opt)
   mapbuf("n", "gk", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opt)
   --]]
@@ -272,16 +295,12 @@ pluginKeys.git = function(bufnr)
 		return "<Ignore>"
 	end, { expr = true })
 
-
-
-
-
 	-- Actions
 	mapbuf({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
 	mapbuf({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
 	mapbuf("n", "<leader>hS", gs.stage_buffer)
 	mapbuf("n", "<leader>hu", gs.undo_stage_hunk)
-	mapbuf("n", "<leader>hr", gs.reset_buffer)
+	mapbuf("n", "<leader>hR", gs.reset_buffer)
 	mapbuf("n", "<leader>hp", gs.preview_hunk)
 	mapbuf("n", "<leader>hb", function()
 		gs.blame_line({ full = true })
