@@ -79,6 +79,12 @@ packer.startup({
 
 		-- git
 		use({ "lewis6991/gitsigns.nvim", commit = "c18e016864c92ecf9775abea1baaa161c28082c3" })
+
+		-- Todo comment
+		use({
+			"folke/todo-comments.nvim",
+			requires = "nvim-lua/plenary.nvim",
+		})
 	end,
 	config = {
 		-- 并发数限制

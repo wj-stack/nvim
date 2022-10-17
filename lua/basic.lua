@@ -81,3 +81,12 @@ vim.o.showmode = false
 -- vim.o.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 vim.cmd("set clipboard+=unnamedplus")
 vim.cmd("set iskeyword+=-") -- key word
+-- wsl 添加剪辑版
+if vim.fn.has("wsl") then
+	vim.cmd([[
+  augroup Yank
+  autocmd!
+  autocmd TextYankPost * :call system('/mnt/c/windows/system32/clip.exe ',@")
+  augroup END
+  ]])
+end

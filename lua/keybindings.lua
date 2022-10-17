@@ -44,7 +44,7 @@ map("n", "tt", ":ToggleTerm<CR>", opt)
 -- map("n", "tv", ":vsp | terminal<CR>", opt)
 -- map("t", "tt", ":ToggleTerm<CR>", opt)
 -- nnoremap <silent><leader>tt <Cmd>exe v:count1 . "ToggleTerm"<CR>
-map("t", "<Esc>", "<C-\\><C-n>:ToggleTerm<CR>", opt)
+map("t", "<Esc>", "<C-\\><C-n>", opt)
 -- map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
 -- map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opt)
 -- map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opt)
@@ -99,6 +99,8 @@ map("n", "<C-w>", ":Bdelete!<CR>", opt)
 map("n", "<C-p>", ":Telescope find_files<CR>", opt)
 -- 全局搜索
 map("n", "<C-f>", ":Telescope live_grep<CR>", opt)
+-- TodoList
+map("n", "<leader>to", ":TodoTelescope<CR>", opt)
 
 -- 插件快捷键
 local pluginKeys = {}
@@ -110,6 +112,7 @@ map("n", "<A-m>", ":NvimTreeToggle<CR>", opt)
 pluginKeys.nvimTreeList = {
 	-- 打开文件或文件夹
 	{ key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
+	{ key = { "O" }, action = "expand_all" },
 	-- 分屏打开文件
 	{ key = "v", action = "vsplit" },
 	{ key = "h", action = "split" },
