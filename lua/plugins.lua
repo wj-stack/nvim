@@ -1,4 +1,10 @@
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+	return
+end
+
 local packer = require("packer")
+
 packer.startup({
 	function(use)
 		-- Packer 可以管理自己本身
@@ -28,8 +34,12 @@ packer.startup({
 		use("glepnir/dashboard-nvim")
 		-- project
 		use("ahmedkhalf/project.nvim")
+
 		-- treesitter
-		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+        use ({
+        'nvim-treesitter/nvim-treesitter',
+        run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+        })
 
 		--------------------- LSP --------------------
 		use({ "williamboman/mason.nvim" })

@@ -1,5 +1,8 @@
-local cmp = require("cmp")
-
+-- Use a protected call so we don't error out on first use
+local status_ok, cmp = pcall(require, "cmp")
+if not status_ok then
+	return
+end
 cmp.setup({
   -- 指定 snippet 引擎
   snippet = {

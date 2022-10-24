@@ -7,17 +7,26 @@ end
 local formatting = null_ls.builtins.formatting
 
 null_ls.setup({
-	debug = false,
+	debug = true,
 	sources = {
 		-- Formatting ---------------------
 		--  brew install shfmt
-	   	formatting.shfmt,
+		formatting.shfmt,
 		-- StyLua
 		formatting.stylua,
-
 		-- golang fmt
 		formatting.gofumpt,
-
+		formatting.goimports,
+		formatting.xmllint,
+		formatting.cmake_format,
+		formatting.yamlfmt,
+		-- formatting.clang_format, -- 与 clangd 冲突
+		--     cmakelang
+		--     gofumpt
+		--     goimports
+		--     shfmt
+		--     xmlformatter
+		--     yamlfmt
 		-- frontend
 		formatting.prettier.with({ -- 只比默认配置少了 markdown
 			filetypes = {
@@ -43,6 +52,6 @@ null_ls.setup({
 	on_attach = function(client)
 		if client.resolved_capabilities.document_formatting then
 			vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-      		end
+		end
 	end,
 })

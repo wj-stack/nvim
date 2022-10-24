@@ -30,7 +30,7 @@ local opts = {
 	flags = {
 		debounce_text_changes = 150,
 	},
-	on_attach = require("lsp.attach"),
+	on_attach = require("lsp.attach-no-format"),
 }
 
 -- 查看目录等信息

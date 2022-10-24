@@ -6,7 +6,7 @@ local opts = {
 	flags = {
 		debounce_text_changes = 150,
 	},
-	on_attach = require("lsp.attach-no-format"),
+	on_attach = require("lsp.attach-format"), -- 默认 lsp 格式化
 }
 
 -- 查看目录等信息

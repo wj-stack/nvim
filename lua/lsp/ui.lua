@@ -12,7 +12,10 @@ end
 
 
 -- lspkind
-local lspkind = require('lspkind')
+local status_ok, lspkind = pcall(require, "lspkind")
+if not status_ok then
+	return
+end
 lspkind.init({
     -- default: true
     -- with_text = true,
