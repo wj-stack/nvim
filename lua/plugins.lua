@@ -36,10 +36,12 @@ packer.startup({
 		use("ahmedkhalf/project.nvim")
 
 		-- treesitter
-        use ({
-        'nvim-treesitter/nvim-treesitter',
-        run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-        })
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			run = function()
+				require("nvim-treesitter.install").update({ with_sync = true })
+			end,
+		})
 
 		--------------------- LSP --------------------
 		use({ "williamboman/mason.nvim" })
@@ -73,19 +75,21 @@ packer.startup({
 		use("lukas-reineke/indent-blankline.nvim")
 
 		-- autopairs
-		use({ "windwp/nvim-autopairs", commit = "fa6876f832ea1b71801c4e481d8feca9a36215ec" }) -- Autopairs, integrates with both cmp and treesitter
+		use({ "windwp/nvim-autopairs" }) -- Autopairs, integrates with both cmp and treesitter
 
 		-- comment
-		use({ "numToStr/Comment.nvim", commit = "2c26a00f32b190390b664e56e32fd5347613b9e2" })
-		use({ "JoosepAlviste/nvim-ts-context-commentstring", commit = "88343753dbe81c227a1c1fd2c8d764afb8d36269" })
+		use({ "numToStr/Comment.nvim" })
+		use({ "JoosepAlviste/nvim-ts-context-commentstring" })
 
 		use({
 			"akinsho/toggleterm.nvim",
 		})
 
 		-- git
-		use({ "lewis6991/gitsigns.nvim", commit = "c18e016864c92ecf9775abea1baaa161c28082c3" })
+		use({ "lewis6991/gitsigns.nvim" })
 
+		-- surround
+		use({ "kylechui/nvim-surround" })
 		-- Todo comment
 		use({
 			"folke/todo-comments.nvim",

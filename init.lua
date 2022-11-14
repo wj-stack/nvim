@@ -19,6 +19,7 @@ require("plugin-config.nvim-autopairs")
 require("plugin-config.comment")
 require("plugin-config.gitsigns")
 require("plugin-config.todo-comments")
+require("plugin-config.surround")
 
 -- 初始界面
 require("plugin-config.dashboard")

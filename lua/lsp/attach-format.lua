@@ -1,7 +1,7 @@
 local on_attach = function(client, bufnr)
 	-- 禁用格式化功能，交给专门插件插件处理 -> null-ls
-	client.resolved_capabilities.document_formatting = true
-	client.resolved_capabilities.document_range_formatting = true
+	client.server_capabilities.documentFormattingProvider = true
+	client.server_capabilities.document_range_formatting = true
 
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)

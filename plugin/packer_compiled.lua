@@ -214,6 +214,11 @@ _G.packer_plugins = {
     path = "/home/wyatt/.local/share/nvim/site/pack/packer/start/project.nvim",
     url = "https://github.com/ahmedkhalf/project.nvim"
   },
+  ["surround.nvim"] = {
+    loaded = true,
+    path = "/home/wyatt/.local/share/nvim/site/pack/packer/start/surround.nvim",
+    url = "https://github.com/ur4ltz/surround.nvim"
+  },
   ["telescope-env.nvim"] = {
     loaded = true,
     path = "/home/wyatt/.local/share/nvim/site/pack/packer/start/telescope-env.nvim",

@@ -31,6 +31,7 @@ local opts = {
 		debounce_text_changes = 150,
 	},
 	on_attach = require("lsp.attach-no-format"),
+	capabilities = require("lsp.capabilities").capabilities,
 }
 
 -- 查看目录等信息
