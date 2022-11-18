@@ -14,6 +14,7 @@ packer.startup({
 		--------------------- colorschemes --------------------
 		-- tokyonight
 		use("folke/tokyonight.nvim")
+		use("sainnhe/sonokai")
 		-------------------------------------------------------
 
 		-- nvim-tree
