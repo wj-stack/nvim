@@ -20,6 +20,7 @@ require("plugin-config.comment")
 require("plugin-config.gitsigns")
 require("plugin-config.todo-comments")
 require("plugin-config.surround")
+require("plugin-config.nvim-go")
 
 -- 初始界面
 require("plugin-config.dashboard")

@@ -96,6 +96,9 @@ packer.startup({
 			"folke/todo-comments.nvim",
 			requires = "nvim-lua/plenary.nvim",
 		})
+
+		use({ "ray-x/go.nvim" })
+		use({ "ray-x/guihua.lua" }) -- recommanded if need floating window support
 	end,
 	config = {
 		-- 并发数限制
