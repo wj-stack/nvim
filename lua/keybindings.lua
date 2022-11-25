@@ -44,7 +44,7 @@ map("i", "jk", "<Esc>", opt)
 map("n", "tt", ":ToggleTerm<CR>", opt)
 -- nnoremap <silent><leader>tt <Cmd>exe v:count1 . "ToggleTerm"<CR>
 -- map("t", "<Esc>", "<Esc>:ToggleTerm<CR>", opt)
--- map("n", "<leader>t", ":sp | resize 15 | terminal<CR>i", opt)
+map("n", "<leader>t", ":sp | resize 15 | terminal<CR>i", opt)
 -- map("n", "tv", ":vsp | terminal<CR>", opt)
 -- map("t", "tt", ":ToggleTerm<CR>", opt)
 -- nnoremap <silent><leader>tt <Cmd>exe v:count1 . "ToggleTerm"<CR>
