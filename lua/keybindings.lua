@@ -63,6 +63,11 @@ map("v", "K", ":move '<-2<CR>gv-gv", opt)
 -- 可视模式下复制到剪辑版
 map("v", "<c-c>", '"+y', opt)
 
+map("n", "x", '"_x', opt) -- 只删除不复制到寄存器
+
+-- 可视模式下批量操作
+map("v", "<leader>n", ":normal ", opt)
+
 -- 上下滚动浏览
 map("n", "J", "4j", opt)
 map("n", "K", "4k", opt)
@@ -100,9 +105,9 @@ map("n", "<C-w>", ":Bdelete!<CR>", opt)
 
 -- Telescope
 -- 查找文件
-map("n", "<C-p>", ":Telescope find_files<CR>", opt)
+map("n", "<C-p>", ":NvimTreeClose<CR>:Telescope find_files<CR>", opt)
 -- 全局搜索
-map("n", "<C-f>", ":Telescope live_grep<CR>", opt)
+map("n", "<C-f>", ":NvimTreeClose<CR>:Telescope live_grep<CR>", opt) -- nvimtree 和 telescope crash
 -- TodoList
 map("n", "<leader>to", ":TodoTelescope<CR>", opt)
 
