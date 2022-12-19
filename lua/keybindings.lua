@@ -111,6 +111,15 @@ map("n", "<C-f>", ":NvimTreeClose<CR>:Telescope live_grep<CR>", opt) -- nvimtree
 -- TodoList
 map("n", "<leader>to", ":TodoTelescope<CR>", opt)
 
+-- text replace
+map("n", "<leader>S", ":lua require('spectre').open()<CR>", opt)
+-- "search current word
+map("n", "<leader>sw", ":lua require('spectre').open_visual({select_word=true})<CR>", opt)
+map("v", "<leader>s", ":lua require('spectre').open_visual()<CR>", opt)
+-- "  search in current file
+map("n", "<leader>sp", ":lua require('spectre').open_file_search()<CR>", opt)
+-- " run command :Spectre
+
 -- 插件快捷键
 local pluginKeys = {}
 

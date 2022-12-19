@@ -31,6 +31,10 @@ packer.startup({
 		-- telescope extensions
 		use("LinArcX/telescope-env.nvim")
 
+		-- use
+		-- text replace
+		use({ "windwp/nvim-spectre", requires = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" } })
+
 		-- dashboard-nvim
 		use("glepnir/dashboard-nvim")
 		-- project
